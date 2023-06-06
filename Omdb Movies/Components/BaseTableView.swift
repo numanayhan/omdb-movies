@@ -11,7 +11,7 @@ import TinyConstraints
 import SnapKit
 
 protocol BaseTableViewDelegate: AnyObject {
-    func didSelect(index: Int)
+    func didSelect(index: Int, data:MoviesResult)
 }
 
 class BaseTableView: UIView {
@@ -94,5 +94,9 @@ extension BaseTableView : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-    
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cellRow = data?.lists?[indexPath.row] else {return }
+        delegate?.didSelect(index: indexPath.row, data: cellRow )
+    }
 }

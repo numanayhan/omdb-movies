@@ -53,7 +53,7 @@ class Search: Base {
         scrollableView.backgroundColor = .white
         scrollableView.stackView.distribution = .fillProportionally
         scrollableView.stackView.alignment = .center
-
+        searchView.delegate = self
         scrollableView.stackView.addArrangedSubview(searchView)
         searchView.anchor( top: scrollableView.stackView.topAnchor, left: scrollableView.stackView.leftAnchor,
             bottom: nil, right: scrollableView.stackView.rightAnchor,
@@ -113,13 +113,22 @@ class Search: Base {
 
 extension Search:UISearchResultsUpdating,UISearchBarDelegate{
     func updateSearchResults(for searchController: UISearchController) {
-
         guard let searchText = searchController.searchBar.text else {
             return
         }
         if searchText.count >= 3 {
             searchParams = searchText
         }
+    }
+}
+
+extension Search: BaseTableViewDelegate {
+
+    func didSelect(index: Int, data:MoviesResult) {
+        let vc = Detail()
+        vc.indexSelected = index
+        vc.data = data
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
