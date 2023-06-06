@@ -76,8 +76,7 @@ class BaseCollectionView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(SearchMediaCell.self, forCellWithReuseIdentifier:  "SearchMediaCell")
         collectionView.isScrollEnabled = true
-        collectionView.backgroundColor = .black
-
+        
         addSubview(labelTitle)
         labelTitle.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
