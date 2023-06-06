@@ -47,8 +47,6 @@ class Detail: UIViewController {
     
     func setLayout(){
         view.backgroundColor = .white
-        
-
         poster.layer.cornerRadius = 5
         poster.layer.masksToBounds = true
         poster.backgroundColor = .red
@@ -68,7 +66,6 @@ class Detail: UIViewController {
             make.height.equalTo(60)
             make.width.equalToSuperview()
         }
-
     }
 
     func refreshLayout(){
@@ -84,14 +81,18 @@ extension Detail {
         if navigationController != nil{
             navigationController?.navigationBar.isHidden = false
             navigationController?.setNavigationBarHidden(false, animated: true)
-            self.navigationItem.setHidesBackButton(false, animated: true)
-            self.navigationController?.navigationBar.backItem?.title = " "
             navigationController?.navigationBar.backgroundColor = .white
             self.navigationController!.navigationBar.tintColor  = .black
-            self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+            self.navigationItem.hidesBackButton = true
+            self.navigationItem.backButtonTitle = "Back"
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"Back", style:.plain, target:nil, action:nil)
             self.navigationController?.navigationBar.prefersLargeTitles = true
             self.navigationItem.title = "Detail"
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(addTapped))
             navigationController?.navigationBar.titleTextAttributes = [.foregroundColor:  UIColor.black]
         }
+    }
+    @objc func addTapped(){
+        self.navigationController?.popViewController(animated: true)
     }
 }
